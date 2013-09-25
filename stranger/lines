@@ -189,8 +189,9 @@ highway=residential [0x06 road_class=1 road_speed=2 resolution 21]
 highway=minor | highway=unclassified [0x07 road_class=1 road_speed=2 resolution 21]
 highway=road { add mkgmap:dead-end-check = false} [0x07 road_class=0 road_speed=1 resolution 21]
 
-highway=track & (tracktype=grade1 | tracktype=grade2) [0x0b road_class=0 road_speed=1 resolution 21]
+(highway=track | highway=unsurfaced) & (tracktype=grade1 | tracktype=grade2) [0x0b road_class=0 road_speed=1 resolution 21]
 highway=track | highway=unsurfaced [0x0a road_class=0 road_speed=1 resolution 21]
+slow_track=yes [0x0a road_class=0 road_speed=1 resolution 23]
 
 highway=pedestrian & (bridge=yes|tunnel=yes|mkgmap:unpaved=1) {add access = no; add foot = yes} [0x0f road_class=0 road_speed=0 resolution 24 continue]
 highway=pedestrian & bridge=yes [0x1161d resolution 22]
@@ -225,7 +226,7 @@ highway=steps {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 
 
 
 # Mop up any unrecognised highway types
-highway=* & !(highway=bus_stop | highway=rest_area) [0x07 resolution 21]
+highway=* & !(highway=bus_stop | highway=rest_area | highway=emergency_access_point) [0x07 resolution 21]
 
 railway=abandoned [0x0f road_class=0 road_speed=0 resolution 24 default_name 'разобранная ж/д' continue]
 railway=abandoned [0x1151e resolution 20 default_name 'разобранная ж/д']
