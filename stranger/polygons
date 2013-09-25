@@ -74,7 +74,7 @@ highway=footway & area=yes {set area:highway=footway; delete highway;}
 highway=pedestrian & area=yes {set area:highway=pedestrian; delete highway;}
 highway=path & area=yes {set area:highway=path; delete highway;}
 highway=platform {set area:highway=platform; delete highway;}
-
+highway=rest_area {set area:highway=service; delete highway;}
 
 area:highway=motorway | area:highway=trunk | area:highway=secondary [0x2e resolution 19]
 area:highway=primary [0x2e resolution 19]
