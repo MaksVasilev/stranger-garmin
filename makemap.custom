@@ -1,0 +1,103 @@
+#!/bin/sh
+
+export PATH=./jre/bin/:./jre/:$PATH
+
+BASEDIR=/home/maks/OSM
+MKGMAPDIR=$BASEDIR/mkgmap-stable
+WWWROOT=/usr/www/garmin
+JAVAMEM="-Djava.io.tmpdir=$BASEDIR/tmp -Xms4G -Xmx6G"
+
+[ -z $1 ] && printf "\nuse: $0 <mapname>\n\n\tset FEDERAL=yes to make federal distinct map\n\tset SOURCE=/path/to/planet.pbf to overwrite source\n\t\t(default is $BASEDIR/source.osm.pbf)\n\n" && exit 0
+
+[ -f /usr/share/java/mkgmap.jar ] && MKGMAPDIR=/usr/share/java
+[ ! -f $MKGMAPDIR/mkgmap.jar ] && printf "\nERROR: mkgmap not found!\n\n" && ABANDON=true
+
+[ -x /usr/bin/sha1sum ] && sum=/usr/bin/sha1sum
+[ -x /sbin/sha1 ] && sum="/sbin/sha1 -r"
+
+[ -z "$sum" ] && printf "\nERROR: SHA1 tools not found!\n\tCheck you coreutils installation for sha1sum (sha1) tool.\n\n" && ABANDON=true
+
+if [ -z $SOURCE ]
+then SOURCE=$BASEDIR/source.osm.pbf && [ ! -f $SOURCE ] && printf "\nERROR: Source file $SOURCE not found!\n\tCreate a symbolic link from planet.osm.pbf or local.osm.pbf\n\tto $BASEDIR/source.osm.pbf or set SOURCE=/path/to/your/source.osm.pbf\n\n" && ABANDON=true
+else [ ! -f $SOURCE ] && printf "\nERROR: file in SOURCE not found!\n\tSOURCE set to $SOURCE\n\n" && ABANDON=true
+fi
+
+[ ! -f $BASEDIR/poly/$1.poly ] && printf "\nERROR: Poly file $BASEDIR/poly/$1.poly not found!\n\n" && ABANDON=true
+
+TILESNUM=`printf $1 | $sum | tr -d "a-z0" | cut -c -5`000
+SHORTMAP=`printf $1 | tr -d " " | cut -c -11`
+
+if [ -z $FEDERAL ]
+then PUBLISH=$WWWROOT/custom/
+else PUBLISH=$WWWROOT/federal/
+fi
+
+[ ! -z $ABANDON ] && exit 0
+
+printf "\nok, work to map:\t$1\n\nmkgmap found in:\t$MKGMAPDIR\nosm source data:\t$SOURCE\npoly file to trim:\tpoly/$1.poly\ntrimmed source file:\tpbf/$1.pbf\noutput map file:\tmap/$1.img\ntile set number:\t$TILESNUM\npublic destination:\t$PUBLISH\n\n"
+
+#exit 0
+
+#osmosis --read-pbf file=$SOURCE --bp file=$BASEDIR/poly/$1.poly completeWays=yes --write-pbf file=$BASEDIR/pbf/$1.pbf
+
+./osmconvert $SOURCE -B=$BASEDIR/poly/$1.poly --complex-ways -o=$BASEDIR/pbf/$1.pbf
+
+([ -d $BASEDIR/img.$1 ] && rm -rf $BASEDIR/img.$1/*) || mkdir $BASEDIR/img.$1 
+([ -d $BASEDIR/split.$1 ] && rm -rf $BASEDIR/split.$1/*) || mkdir $BASEDIR/split.$1
+[ ! -d $BASEDIR/map ] && mkdir $BASEDIR/map
+
+./splitter --max-nodes=1200000 \
+  --overlap=12000 \
+  --output-dir=$BASEDIR/split.$1 \
+  --write-kml=$BASEDIR/tiles/$1-tiles.kml \
+  --output=pbf \
+  --keep-complete=false \
+  $BASEDIR/pbf/$1.pbf \
+
+gpsbabel -i kml -o osm -f $BASEDIR/tiles/$1-tiles.kml -F $BASEDIR/tiles/$1-tiles.osm
+
+java $JAVAMEM -jar $MKGMAPDIR/mkgmap.jar --verbose \
+        --gmapsupp --tdbfile \
+        --mapname=$TILESNUM \
+        --family-name="OpenStreetMap + ST-GIS by Maks Vasilev" \
+        --product-id=1 \
+        --family-id=43 \
+        --series-name="Russia" \
+        --description="$SHORTMAP, http://velo100.ru/gps, v.`date +%d.%m.%Y`" \
+        --country-name="RUSSIA" --country-abbr="RUS" \
+        --copyright-message="`date +%Y`, OpenStreetMap CC-BY-SA 2.0, ST-GIS CC-BY-SA 3.0, ST-GIS, Maks Vasilev" \
+        --charset=cp1251 --code-page=1251 --lower-case \
+	--name-tag-list=name:ru,name,name:en,int_name \
+        --style-file=$BASEDIR/velo100mapper/stranger/ \
+        --remove-short-arcs \
+        --drive-on-right \
+        --check-roundabouts \
+        --output-dir=$BASEDIR/img.$1/ \
+        --make-poi-index --index --poi-address \
+        --route \
+        --draw-priority=31 \
+        --bounds=$BASEDIR/bounds \
+        --add-pois-to-areas \
+        --generate-sea=multipolygon,extend-sea-sectors,close-gaps=30000,floodblocker \
+        --housenumbers \
+  $BASEDIR/velo100mapper/stranger.typ \
+  $BASEDIR/split.$1/*.pbf
+
+mv $BASEDIR/img.$1/gmapsupp.img $BASEDIR/map/$1.img
+
+cd $BASEDIR/map
+
+[ -f $1.img.xz ] && rm $1.img.xz
+xz --compress -9 --extreme --keep $1.img
+
+$sum $1.img > $1.img.sha1
+
+echo '# '`date` >> $1.img.sha1 
+echo '# '`ls -la $1.img` >> $1.img.sha1 
+echo '# '`ls -lah $1.img` >> $1.img.sha1
+[ "$BUILD_MAP_FROM_CRON" = 'work' ] && echo "# autobuild" >> $1.img.sha1
+
+mv $1.img.xz $1.img.sha1 $PUBLISH
+
+cd -
+
