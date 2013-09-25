@@ -1,0 +1,5 @@
+
+highway=no {set delete highway;}
+building=no {set delete building;}
+bridge=no {set delete bridge;}
+railway=no {set delete railway;}

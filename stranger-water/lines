@@ -1,0 +1,16 @@
+# -------------------------------------------------------------------
+# This is the water routing only style
+# (c) Maks Vasilev, ST-GIS
+# 2013
+
+
+# роутинг по рекам - невидимая линия на 0-м слое
+
+waterway=canal | waterway=river
+  {add foot = yes; add bicycle = no} [0x03 road_class=0 road_speed=2 resolution 24]
+  
+waterway=drain | waterway=stream
+  {add foot = yes; add bicycle = no} [0x04 road_class=0 road_speed=1 resolution 24]
+
+waterway=rapid | waterway=rapids | whitewater=rapid | whitewater=rapids
+  {add foot = yes; add bicycle = no} [0x05 road_class=0 road_speed=0 resolution 24]
