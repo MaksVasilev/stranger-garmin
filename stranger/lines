@@ -205,14 +205,14 @@ minor_service=yes & oneway=yes [0x137 resolution 24]
 minor_service=yes & mkgmap:unpaved=1 [0x147 resolution 24]
 minor_service=yes [0x07 road_class=0 road_speed=1 resolution 24]
 
-highway=service & (bridge=yes|tunnel=yes|oneway=yes|mkgmap:unpaved=1) [0x0f road_class=0 road_speed=2 resolution 24 continue]
-highway=service & bridge=yes [0x1161e resolution 22]
-highway=service & tunnel=yes [0x11607 resolution 22]
-highway=service & oneway=yes [0x10207 resolution 22-23 continue]
-highway=service & oneway=yes [0x137  resolution 24]
-highway=service & mkgmap:unpaved=1 [0x147  resolution 22]
-highway=service [0x07 road_class=0 road_speed=2 resolution 22]
-
+(highway=service | highway=raceway) & (bridge=yes|tunnel=yes|oneway=yes|mkgmap:unpaved=1) [0x0f road_class=0 road_speed=2 resolution 24 continue]
+(highway=service | highway=raceway) & bridge=yes [0x1161e resolution 22]
+(highway=service | highway=raceway) & tunnel=yes [0x11607 resolution 22]
+(highway=service | highway=raceway) & oneway=yes [0x10207 resolution 22-23 continue]
+(highway=service | highway=raceway) & oneway=yes [0x137  resolution 24]
+(highway=service | highway=raceway) & mkgmap:unpaved=1 [0x147  resolution 22]
+highway=service | highway=raceway [0x07 road_class=0 road_speed=2 resolution 22]
+ 
 highway=byway [0x16 road_class=0 road_speed=0 resolution 23]
 highway=cycleway {add access = no; add bicycle = yes; add foot = yes} [0x16 road_class=0 road_speed=1 resolution 23]
 highway=bridleway {add access = no; add bicycle = yes; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 23]
@@ -225,7 +225,7 @@ highway=steps {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 
 
 
 # Mop up any unrecognised highway types
-highway=* [0x07 resolution 21]
+highway=* & !(highway=bus_stop | highway=rest_area) [0x07 resolution 21]
 
 railway=abandoned [0x0f road_class=0 road_speed=0 resolution 24 default_name 'разобранная ж/д' continue]
 railway=abandoned [0x1151e resolution 20 default_name 'разобранная ж/д']
@@ -288,6 +288,8 @@ barrier=city_wall | barrier=retaining_wall [0x11604 resolution 20 continue]
 barrier=wall & !(leisure=* | amenity=*) [0x38 resolution 22 continue]
 barrier=fence & !(leisure=* | amenity=*) [0x19 resolution 23 continue]
 barrier=hedge & !(leisure=* | amenity=*) [0x11602 resolution 23 continue]
+
+barrier=* [0x19 resolution 24]
 
 # Канатная дорога (спасибо maptourist.org)
 aerialway=cable_car  {name '${name} (${ref})' | '${name}' | '${ref}' } [0x10f00 resolution 22]
