@@ -222,7 +222,7 @@ highway=bridleway {add access = no; add bicycle = yes; add foot = yes} [0x16 roa
 highway=footway {add access = no; add foot = yes; add bicycle = no} [0x0d road_class=0 road_speed=0 resolution 24] 
 man_made=pier {add access = no; add foot = yes; add bicycle = no} [0x0d road_class=0 road_speed=0 resolution 24 continue]
 highway=path {add access = no; add bicycle = yes; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 22]
-highway=steps {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 24]
+highway=steps {add access = no; add foot = yes; add bicycle = no} [0x16 road_class=0 road_speed=0 resolution 24]
 
 
 # Mop up any unrecognised highway types
