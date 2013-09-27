@@ -8,7 +8,6 @@
 # and http://wiki.openstreetmap.org/wiki/Mkgmap/help/Custom_styles
 # for more information.
 
-include 'flush';
 include 'trueyes';
 include 'status';
 include 'address';
@@ -34,11 +33,11 @@ natural=cliff [0x10f17 resolution 21 continue]
 natural=ridge [0x11518 resolution 18 continue]
 
 # Set highway names to include the reference if there is one
-highway=motorway {name '${ref|highway-symbol:hbox} ${name}' | '${ref|highway-symbol:hbox}' | '${name}' }
-highway=trunk {name '${ref|highway-symbol:hbox} ${name}' | '${ref|highway-symbol:hbox}' | '${name}'; add mkgmap:display_name = '${name} (${ref})' }
-highway=primary {name '${ref|highway-symbol:box} ${name}' | '${ref|highway-symbol:box}' | '${name}'; add mkgmap:display_name = '${name} (${ref})' }
-highway=secondary {name '${ref|highway-symbol:oval} ${name}' | '${ref|highway-symbol:oval}' | '${name}'; add mkgmap:display_name = '${name} (${ref})' }
-highway=* {name '${ref} ${name}' | '${ref}' | '${name}' }
+highway=motorway {name '${name} ${ref|highway-symbol:hbox}' | '${ref|highway-symbol:hbox}' | '${name}' }
+highway=trunk {name '${name} ${ref|highway-symbol:hbox}' | '${ref|highway-symbol:hbox}' | '${name}'; add mkgmap:display_name = '${name} (${ref})' }
+highway=primary {name '${name} ${ref|highway-symbol:box}' | '${ref|highway-symbol:box}' | '${name}'; add mkgmap:display_name = '${name} (${ref})' }
+highway=secondary {name '${name} ${ref|highway-symbol:oval}' | '${ref|highway-symbol:oval}' | '${name}'; add mkgmap:display_name = '${name} (${ref})' }
+highway=* {name '${name} ${ref}' | '${ref}' | '${name}' }
 
 # Flag unpaved roads.
 highway=*
@@ -189,9 +188,12 @@ highway=residential [0x06 road_class=1 road_speed=2 resolution 21]
 highway=minor | highway=unclassified [0x07 road_class=1 road_speed=2 resolution 21]
 highway=road { add mkgmap:dead-end-check = false} [0x07 road_class=0 road_speed=1 resolution 21]
 
-(highway=track | highway=unsurfaced) & (tracktype=grade1 | tracktype=grade2) [0x0b road_class=0 road_speed=1 resolution 21]
-highway=track | highway=unsurfaced [0x0a road_class=0 road_speed=1 resolution 21]
-slow_track=yes [0x0a road_class=0 road_speed=1 resolution 23]
+(highway=track | highway=unsurfaced) & (tracktype=grade1 | tracktype=grade2) & length()<=500 [0x0b road_class=0 road_speed=1 resolution 22]
+(highway=track | highway=unsurfaced) & (tracktype=grade1 | tracktype=grade2) & length()>500 [0x0b road_class=0 road_speed=1 resolution 21]
+(highway=track | highway=unsurfaced) & length()<=500 [0x0a road_class=0 road_speed=1 resolution 22]
+(highway=track | highway=unsurfaced) & length()>500 [0x0a road_class=0 road_speed=1 resolution 21]
+slow_track=yes & length()<=100 [0x0a road_class=0 road_speed=1 resolution 24]
+slow_track=yes & length()>100 [0x0a road_class=0 road_speed=1 resolution 23]
 
 highway=pedestrian & (bridge=yes|tunnel=yes|mkgmap:unpaved=1) {add access = no; add foot = yes} [0x0f road_class=0 road_speed=0 resolution 24 continue]
 highway=pedestrian & bridge=yes [0x1161d resolution 22]
@@ -221,7 +223,8 @@ highway=bridleway {add access = no; add bicycle = yes; add foot = yes} [0x16 roa
 (highway=footway | highway=path ) & bridge=yes {add access = no; add foot = yes} [0x1161d resolution 24]
 highway=footway {add access = no; add foot = yes; add bicycle = no} [0x0d road_class=0 road_speed=0 resolution 24] 
 man_made=pier {add access = no; add foot = yes; add bicycle = no} [0x0d road_class=0 road_speed=0 resolution 24 continue]
-highway=path {add access = no; add bicycle = yes; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 22]
+highway=path & length()<=250 {add access = no; add bicycle = yes; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 23]
+highway=path & length()>250 {add access = no; add bicycle = yes; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 22]
 highway=steps {add access = no; add foot = yes; add bicycle = no} [0x16 road_class=0 road_speed=0 resolution 24]
 
 
@@ -278,19 +281,19 @@ boundary=political [0x1c resolution 17]
 # удалям надписи на заборах, а потом обратно вставляем (не работает что-то)
 (barrier=wall|barrier=fence|barrier=hedge) & (leisure=* | amenity=*) {set temp_name='${name}'; set mkgmap:display_name=''; delete name;}
 
-barrier=wall & (leisure=* | amenity=*) [0x38 resolution 24 continue]
-barrier=fence & (leisure=* | amenity=*) [0x19 resolution 24 continue]
-barrier=hedge & (leisure=* | amenity=*) [0x11602 resolution 24 continue]
+barrier=wall & (leisure=* | amenity=* | length()<200 ) [0x38 resolution 24 continue]
+barrier=fence & (leisure=* | amenity=* | length()<200 ) [0x19 resolution 24 continue]
+barrier=hedge & (leisure=* | amenity=* | length()<200 ) [0x11602 resolution 24 continue]
 
 (barrier=wall|barrier=fence|barrier=hedge) & (leisure=* | amenity=*) {set name='${temp_name}'; delete temp_name;}
 
 barrier=city_wall & two_sided=yes [0x11603 resolution 20 continue]
 barrier=city_wall | barrier=retaining_wall [0x11604 resolution 20 continue]
-barrier=wall & !(leisure=* | amenity=*) [0x38 resolution 22 continue]
-barrier=fence & !(leisure=* | amenity=*) [0x19 resolution 23 continue]
-barrier=hedge & !(leisure=* | amenity=*) [0x11602 resolution 23 continue]
+barrier=wall & !(leisure=* | amenity=* | length()<200) [0x38 resolution 22 continue]
+barrier=fence & !(leisure=* | amenity=* | length()<200) [0x19 resolution 23 continue]
+barrier=hedge & !(leisure=* | amenity=* | length()<200) [0x11602 resolution 23 continue]
 
-barrier=* [0x19 resolution 24]
+barrier=yes [0x19 resolution 24 continue]
 
 # Канатная дорога (спасибо maptourist.org)
 aerialway=cable_car  {name '${name} (${ref})' | '${name}' | '${ref}' } [0x10f00 resolution 22]

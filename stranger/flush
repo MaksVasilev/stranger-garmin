@@ -1,7 +1,0 @@
-
-highway=no | highway=abandoned {delete highway;}
-building=no {delete building;}
-bridge=no | bridge=abandoned {delete bridge;}
-railway=no {delete railway;}
-
-highway=ford {set slow_track=yes; delete highway;}

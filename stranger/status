@@ -17,13 +17,13 @@ highway=* & name ~ '.*(набережная).*' {name '${name|subst:набере
 highway=* & name ~ '.*(шоссе).*' {name '${name|subst:шоссе=>} шоссе'}
 highway=* & name ~ '.*(зимник).*' {name '${name|subst:зимник=>} зим.'}
 
-name=* { name '${name|subst:микрорайон=> мкр.
-            |subst:район=> р-н
-            |subst:разъезд=> раз.
-            |subst:имени=> им.
-            |subst:урочище=> ур.
-            |subst:слобода=> сл.
-            }' }
+#name=* { name '${name|subst:микрорайон=> мкр.
+#            |subst:район=> р-н
+#            |subst:разъезд=> раз.
+#            |subst:имени=> им.
+#            |subst:урочище=> ур.
+#            |subst:слобода=> сл.
+#            }' }
 
 mkgmap:admin_level4=* { set mkgmap:admin_level4='${mkgmap:admin_level4|subst:республика=> респ.
             |subst:область=> обл.
