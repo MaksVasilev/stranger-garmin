@@ -52,7 +52,7 @@ landuse=quarry [0x1d resolution 18]
 landuse=recreation_ground [0x17 resolution 18]
 landuse=reservoir [0x3f resolution 18]
 # on resolution 24, display building=* instead of landuse=residential
-landuse=residential & place!=locality & place!=hamlet & place!=village [0x02 resolution 17]
+landuse=residential & place!=locality & place!=hamlet & place!=village & place!=allotments [0x02 resolution 17]
 landuse=retail [0x2a resolution 20]
 landuse=village_green [0x17 resolution 20]
 landuse=vineyard [0x1151f resolution 19]
@@ -134,7 +134,7 @@ natural=beach | natural=sand [0x11519 resolution 19]
 natural=heath [0x11518 resolution 19]
 natural=fell [0x1151d resolution 19]
 
-place=village | place=hamlet | place=locality [0x03 resolution 18]
+place=village | place=hamlet | place=locality | place=allotments [0x03 resolution 18]
 place=island & name=* [0x53 resolution 18]
 place=islet & name=* [0x53 resolution 20]
 

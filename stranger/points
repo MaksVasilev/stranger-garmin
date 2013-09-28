@@ -238,6 +238,7 @@ place=town & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | '
 place=suburb & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'район' } [0x0900 resolution 21]
 place=village & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'село' } [0x0a00 resolution 19]
 place=hamlet & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'деревня' } [0x0b00 resolution 21]
+place=allotments & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'дачи' } [0x0b00 resolution 21]
 place=isolated_dwelling & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'деревня' } [0x0b00 resolution 21]
 place=locality & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'урочище' } [0x0c00 resolution 21]
 place=island & mkgmap:area2poi!=true {name '${name} (${alt_name})' | '${name}' | 'остров' } [0x650c resolution 20]
