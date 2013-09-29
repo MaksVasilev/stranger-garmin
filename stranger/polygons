@@ -115,22 +115,33 @@ military=range [0x04 resolution 18]
 natural=glacier [0x4d resolution 16]
 natural=marsh [0x51 resolution 18]
 natural=mud [0x51 resolution 18 continue]
-natural=wetland & wetland!=tidalflat [0x51 resolution 18 continue]
+
+(natural=wetland & wetland!=tidalflat) & area_size() > 3000 [0x51 resolution 18 continue]
+(natural=wetland & wetland!=tidalflat) & area_size() <= 3000 [0x51 resolution 21 continue]
+
 water=tidal | wetland=tidalflat | tidal=yes [0x1151b resolution 19 continue]
-natural=scrub [0x4f resolution 19]
-natural=water [0x3c resolution 16]
+
+natural=scrub & area_size() > 2000 [0x4f resolution 19]
+natural=scrub & area_size() <= 2000 [0x4f resolution 22]
+
+natural=water & area_size() > 5000 [0x3c resolution 16]
+natural=water & area_size() > 3000 & area_size() <= 5000 [0x3c resolution 20]
+natural=water & area_size() <= 3000 [0x3c resolution 22]
+
 natural=waterfall | waterway=waterfall [0x47 resolution 21]
 natural=sea | natural=bay [0x32 resolution 10 continue]
 
-landuse=forest | natural=wood | landuse=wood [0x50 resolution 18-18 continue]
+wood=coniferous [0x11604 resolution 20 continue]
+wood=deciduous [0x11605 resolution 20 continue]
+wood=mixed [0x11606 resolution 20 continue]
 
-wood=coniferous [0x11604 resolution 19]
-wood=deciduous [0x11605 resolution 19]
-wood=mixed [0x11606 resolution 19]
+(landuse=forest | natural=wood | landuse=wood) & area_size() > 5000 [0x50 resolution 18]
+(landuse=forest | natural=wood | landuse=wood) & area_size() > 3000 & area_size() <= 5000 [0x50 resolution 20]
+(landuse=forest | natural=wood | landuse=wood) & area_size() <= 3000 [0x50 resolution 22]
 
-landuse=forest | natural=wood | landuse=wood [0x50 resolution 19]
+(natural=beach | natural=sand) & area_size() > 2000  [0x11519 resolution 19]
+(natural=beach | natural=sand) & area_size() <= 2000  [0x11519 resolution 22]
 
-natural=beach | natural=sand [0x11519 resolution 19]
 natural=heath [0x11518 resolution 19]
 natural=fell [0x1151d resolution 19]
 
