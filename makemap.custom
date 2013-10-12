@@ -68,7 +68,7 @@ java $JAVAMEM -jar $MKGMAPDIR/mkgmap.jar --verbose \
         --copyright-message="`date +%Y`, OpenStreetMap CC-BY-SA 2.0, ST-GIS CC-BY-SA 3.0, ST-GIS, Maks Vasilev" \
         --charset=cp1251 --code-page=1251 --lower-case \
 	--name-tag-list=name:ru,name,name:en,int_name \
-        --style-file=$BASEDIR/velo100mapper/stranger/ \
+        --style-file=$BASEDIR/stranger/ \
         --remove-short-arcs \
         --drive-on-right \
         --check-roundabouts \
@@ -80,7 +80,7 @@ java $JAVAMEM -jar $MKGMAPDIR/mkgmap.jar --verbose \
         --add-pois-to-areas \
         --generate-sea=multipolygon,extend-sea-sectors,close-gaps=30000,floodblocker \
         --housenumbers \
-  $BASEDIR/velo100mapper/stranger.typ \
+  $BASEDIR/stranger.typ \
   $BASEDIR/split.$1/*.pbf
 
 mv $BASEDIR/img.$1/gmapsupp.img $BASEDIR/map/$1.img
