@@ -17,15 +17,10 @@ highway=* & name ~ '.*(набережная).*' {set name='${name|subst:набе
 highway=* & name ~ '.*(шоссе).*' {set name='${name|subst:шоссе=>} шоссе'}
 highway=* & name ~ '.*(зимник).*' {set name='${name|subst:зимник=>} зим.'}
 
-# not work
+# 
 
-#name ~ '.*Бол(ьшая|ьшие|ьшое|ьшой).*' {name '${name|subst:$(1)=>}.'}
-#name ~ '.*Мал(ая|ые|ое|ый).*' {name '${name|subst:$(1)=>}.'}
-
-# not work?
-
-waterway=* & name ~ '.*(Большая).*' {name '${name|subst:Большая=>} Бол.'}
-waterway=* & name ~ '.*(Малая).*' {name '${name|subst:Малая=>} Мал.'}
+waterway=* & name ~ '.*(Большая).*' {set name='${name|subst:Большая=>Бол.}'}
+waterway=* & name ~ '.*(Малая).*' {set name='${name|subst:Малая=>Мал.}'}
 
 # общеупотребимые сокращения
 
