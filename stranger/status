@@ -1,25 +1,35 @@
 # сокращаем статусные части названий улиц и задвигаем их взад
 
-highway=* & name ~ '.*(улица).*' {name '${name|subst:улица=>} ул.'}
-highway=* & name ~ '.*(переулок).*' {name '${name|subst:переулок=>} пер.'}
-highway=* & name ~ '.*(проспект).*' {name '${name|subst:проспект=>} пр.'}
-highway=* & name ~ '.*(проезд).*' {name '${name|subst:проезд=>} пр-д'}
-highway=* & name ~ '.*(разъезд).*' {name '${name|subst:разъезд=>} раз.'}
-highway=* & name ~ '.*(тракт).*' {name '${name|subst:тракт=>} тр-т'}
-highway=* & name ~ '.*(площадь).*' {name '${name|subst:площадь=>} пл.'}
-highway=* & name ~ '.*(бульвар).*' {name '${name|subst:бульвар=>} бул.'}
-highway=* & name ~ '.*(дорога).*' {name '${name|subst:дорога=>} дор.'}
-highway=* & name ~ '.*(тупик).*' {name '${name|subst:тупик=>} т.'}
-highway=* & name ~ '.*(микрорайон).*' {name '${name|subst:микрорайон=>} мкр.'}
-highway=* & name ~ '.*(аллея).*' {name '${name|subst:аллея=>} ал.'}
-highway=* & name ~ '.*(линия).*' {name '${name|subst:линия=>} лин.'}
-highway=* & name ~ '.*(набережная).*' {name '${name|subst:набережная=>} наб.'}
-highway=* & name ~ '.*(шоссе).*' {name '${name|subst:шоссе=>} шоссе'}
-highway=* & name ~ '.*(зимник).*' {name '${name|subst:зимник=>} зим.'}
+highway=* & name ~ '.*(улица).*' {set name='${name|subst:улица=>} ул.'}
+highway=* & name ~ '.*(переулок).*' {set name='${name|subst:переулок=>} пер.'}
+highway=* & name ~ '.*(проспект).*' {set name='${name|subst:проспект=>} пр.'}
+highway=* & name ~ '.*(проезд).*' {set name='${name|subst:проезд=>} пр-д'}
+highway=* & name ~ '.*(разъезд).*' {set name='${name|subst:разъезд=>} раз.'}
+highway=* & name ~ '.*(тракт).*' {set name='${name|subst:тракт=>} тр-т'}
+highway=* & name ~ '.*(площадь).*' {set name='${name|subst:площадь=>} пл.'}
+highway=* & name ~ '.*(бульвар).*' {set name='${name|subst:бульвар=>} бул.'}
+highway=* & name ~ '.*(дорога).*' {set name='${name|subst:дорога=>} дор.'}
+highway=* & name ~ '.*(тупик).*' {set name='${name|subst:тупик=>} т.'}
+highway=* & name ~ '.*(микрорайон).*' {set name='${name|subst:микрорайон=>} мкр.'}
+highway=* & name ~ '.*(аллея).*' {set name='${name|subst:аллея=>} ал.'}
+highway=* & name ~ '.*(линия).*' {set name='${name|subst:линия=>} лин.'}
+highway=* & name ~ '.*(набережная).*' {set name='${name|subst:набережная=>} наб.'}
+highway=* & name ~ '.*(шоссе).*' {set name='${name|subst:шоссе=>} шоссе'}
+highway=* & name ~ '.*(зимник).*' {set name='${name|subst:зимник=>} зим.'}
+
+# not work
+
+#name ~ '.*Бол(ьшая|ьшие|ьшое|ьшой).*' {name '${name|subst:$(1)=>}.'}
+#name ~ '.*Мал(ая|ые|ое|ый).*' {name '${name|subst:$(1)=>}.'}
+
+# not work?
+
+waterway=* & name ~ '.*(Большая).*' {name '${name|subst:Большая=>} Бол.'}
+waterway=* & name ~ '.*(Малая).*' {name '${name|subst:Малая=>} Мал.'}
 
 # общеупотребимые сокращения
 
-name=* { name '${name|subst:микрорайон=> мкр.
+name=* { set name='${name|subst:микрорайон=> мкр.
             |subst:район=> р-н
             |subst:разъезд=> раз.
             |subst:имени=> им.
@@ -28,6 +38,7 @@ name=* { name '${name|subst:микрорайон=> мкр.
             |subst:хутор=> х.
             |subst:станция=> ст.
             |subst:село=> с.
+            |subst:посёлок=> пос.
             |subst:совхоз=> свх.
             |subst:колхоз=> клх.
             |subst:станица=> ст-ца
@@ -35,14 +46,15 @@ name=* { name '${name|subst:микрорайон=> мкр.
 
 # гидрография, топография
 
-natural=water & name ~ '.*(озеро) .*' {name '${name|subst:озеро=>} оз.'}
-natural=water & name ~ '.*(оз.) .*' {name '${name|subst:оз.=>} оз.'}
-natural=water & name ~ '.*(водохранилище).*' {name '${name|subst:водохранилище=>} вдхр.'}
-natural=water & name ~ '.*(залив).*' {name '${name|subst:озеро=>} зал.'}
-natural=water & name ~ '.*(бухта).*' {name '${name|subst:водохранилище=>} бух.'}
+natural=water & ( name ~ '^(озеро) .*' | name ~ '.* (озеро)$' ) {set name='${name|subst:озеро=>} оз.'}
+natural=water & name ~ '^(оз.).*' {set name='${name|subst:оз.=>} оз.'}
+natural=water & name ~ '.*(водохранилище).*' {set name='${name|subst:водохранилище=>} вдхр.'}
+natural=water & name ~ '.*(залив).*' {set name='${name|subst:озеро=>} зал.'}
+natural=water & name ~ '.*(бухта).*' {set name='${name|subst:водохранилище=>} бух.'}
 
-waterway=* & name ~ '.*(река).*' {name '${name|subst:река=>} р.'}
-waterway=* & name ~ '.*(ручей).*' {name '${name|subst:ручей=>} руч.'}
+waterway=* & name ~ '.*(река).*' {set name='${name|subst:река=>} р.'}
+waterway=* & name ~ '.*(ручей).*' {set name='${name|subst:ручей=>} руч.'}
+waterway=* & name ~ '.*(старица).*' {set name='${name|subst:старица=>} стар.'}
 
 mkgmap:admin_level4=* { set mkgmap:admin_level4='${mkgmap:admin_level4|subst:республика=> респ.
             |subst:область=> обл.
@@ -70,4 +82,4 @@ addr:street ~ '.*(зимник).*' {set addr:street='${addr:street|subst:зим�
 
 #mkgmap:admin_level6 ~ '.*(городской округ).*' { set mkgmap:admin_level6='${mkgmap:admin_level6|subst:городской округ=>} ГО'}
 
-opening_hours='24/7' { name '${name} [24]'; }
+opening_hours='24/7' { set name='${name} [24]'; }
