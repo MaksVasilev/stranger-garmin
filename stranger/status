@@ -17,13 +17,32 @@ highway=* & name ~ '.*(набережная).*' {name '${name|subst:набере
 highway=* & name ~ '.*(шоссе).*' {name '${name|subst:шоссе=>} шоссе'}
 highway=* & name ~ '.*(зимник).*' {name '${name|subst:зимник=>} зим.'}
 
+# общеупотребимые сокращения
+
 name=* { name '${name|subst:микрорайон=> мкр.
             |subst:район=> р-н
             |subst:разъезд=> раз.
             |subst:имени=> им.
             |subst:урочище=> ур.
             |subst:слобода=> сл.
+            |subst:хутор=> х.
+            |subst:станция=> ст.
+            |subst:село=> с.
+            |subst:совхоз=> свх.
+            |subst:колхоз=> клх.
+            |subst:станица=> ст-ца
             }' }
+
+# гидрография, топография
+
+natural=water & name ~ '.*(озеро) .*' {name '${name|subst:озеро=>} оз.'}
+natural=water & name ~ '.*(оз.) .*' {name '${name|subst:оз.=>} оз.'}
+natural=water & name ~ '.*(водохранилище).*' {name '${name|subst:водохранилище=>} вдхр.'}
+natural=water & name ~ '.*(залив).*' {name '${name|subst:озеро=>} зал.'}
+natural=water & name ~ '.*(бухта).*' {name '${name|subst:водохранилище=>} бух.'}
+
+waterway=* & name ~ '.*(река).*' {name '${name|subst:река=>} р.'}
+waterway=* & name ~ '.*(ручей).*' {name '${name|subst:ручей=>} руч.'}
 
 mkgmap:admin_level4=* { set mkgmap:admin_level4='${mkgmap:admin_level4|subst:республика=> респ.
             |subst:область=> обл.
