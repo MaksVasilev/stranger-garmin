@@ -12,9 +12,9 @@ include 'trueyes';
 include 'status';
 include 'address';
 
-aeroway=airport {name '${name}, аэропорт' | 'аэропорт' } [0x07 resolution 16]
-aeroway=aerodrome {name '${name}, аэродром' | 'аэродром' } [0x07 resolution 16]
-aeroway=helipad {name '${name}, вертолётная площадка' | 'вертолётная площадка' } [0x0e resolution 20]
+aeroway=airport {set name='${name}, аэропорт' | 'аэропорт' } [0x07 resolution 16]
+aeroway=aerodrome {set name='${name}, аэродром' | 'аэродром' } [0x07 resolution 16]
+aeroway=helipad {set name='${name}, вертолётная площадка' | 'вертолётная площадка' } [0x0e resolution 20]
 
 amenity=kindergarten & building=* | building=kindergarten [0x25 resolution 24]
 amenity=kindergarten [0x26 resolution 21]
