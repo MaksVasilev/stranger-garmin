@@ -17,10 +17,26 @@ highway=* & name ~ '.*(набережная).*' {set name='${name|subst:набе
 highway=* & name ~ '.*(шоссе).*' {set name='${name|subst:шоссе=>} шоссе'}
 highway=* & name ~ '.*(зимник).*' {set name='${name|subst:зимник=>} зим.'}
 
-# 
+# Нужно ли для place?
 
-waterway=* & name ~ '.*(Большая).*' {set name='${name|subst:Большая=>Бол.}'}
-waterway=* & name ~ '.*(Малая).*' {set name='${name|subst:Малая=>Мал.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Большая).*' {set name='${name|subst:Большая=>Бол.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Большие).*' {set name='${name|subst:Большие=>Бол.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Большое).*' {set name='${name|subst:Большое=>Бол.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Большой).*' {set name='${name|subst:Большой=>Бол.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Малая).*' {set name='${name|subst:Малая=>Мал.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Малые).*' {set name='${name|subst:Малые=>Мал.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Малое).*' {set name='${name|subst:Малое=>Мал.}'}
+#(waterway=* | place ~ '(village|hamlet|allotments|isolated_dwelling|locality|island)' ) & name ~ '.*(Малый).*' {set name='${name|subst:Малый=>Мал.}'}
+
+(waterway=* | natural=*) & name ~ '.*(Большая).*' {set name='${name|subst:Большая=>Бол.}'}
+(waterway=* | natural=*) & name ~ '.*(Большие).*' {set name='${name|subst:Большие=>Бол.}'}
+(waterway=* | natural=*) & name ~ '.*(Большое).*' {set name='${name|subst:Большое=>Бол.}'}
+(waterway=* | natural=*) & name ~ '.*(Большой).*' {set name='${name|subst:Большой=>Бол.}'}
+(waterway=* | natural=*) & name ~ '.*(Малая).*' {set name='${name|subst:Малая=>Мал.}'}
+(waterway=* | natural=*) & name ~ '.*(Малые).*' {set name='${name|subst:Малые=>Мал.}'}
+(waterway=* | natural=*) & name ~ '.*(Малое).*' {set name='${name|subst:Малое=>Мал.}'}
+(waterway=* | natural=*) & name ~ '.*(Малый).*' {set name='${name|subst:Малый=>Мал.}'}
+
 
 # общеупотребимые сокращения
 
