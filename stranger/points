@@ -14,7 +14,6 @@ place=* & name='Кирово-Чепецк' {set place=city}
 include 'trueyes';
 include 'status';
 include 'address';
-
 internet_access=yes { name 'Internet ${name}' | 'Internet' } [0x2f12 resolution 24 continue]
 internet_access=* & internet_access!=no & internet_access!=yes { name 'Internet(${internet_access}) ${name|def:}' } [0x2f12 resolution 24 continue]
 
@@ -196,7 +195,7 @@ man_made=tower | man_made=chimney [0x6411 resolution 23]
 power=tower [0x11511 resolution 23]
 power=pole | power=cable_distribution_cabinet | aerialway=pylon [0x1151a resolution 24]
 man_made=survey_point | point=trigopunct | point=triangulation {name '${ref} (${name}, ${ele})' | '${ref} (${ele})' | '${ref} (${name})' | '${ref}' | '${ele}' '${name}'} [0x11601 resolution 22]
-man_made=lighthouse [0x16 resolution 19]
+man_made=lighthouse [0x116 resolution 19]
 
 highway=milestone | railway=milestone | waterway=milestone
     {name '${pk} (${pk:backward})' | '${pk}' | '(${pk:backward})'} [0x1151a resolution 24]
