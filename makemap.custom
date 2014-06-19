@@ -78,7 +78,8 @@ java $JAVAMEM -jar $MKGMAPDIR/mkgmap.jar --verbose \
         --draw-priority=31 \
         --bounds=$BASEDIR/bounds \
         --add-pois-to-areas \
-        --generate-sea=multipolygon,extend-sea-sectors,close-gaps=30000,floodblocker \
+	--precomp-sea=sea \
+        --generate-sea=multipolygon \
         --housenumbers \
   $BASEDIR/stranger.typ \
   $BASEDIR/split.$1/*.pbf
