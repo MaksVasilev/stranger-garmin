@@ -9,6 +9,7 @@ building=no | building='0' {delete building;}
 highway=no | highway=abandoned | highway=piste {delete highway;}
 railway=no {delete railway;}
 
+highway=services |  highway=rest_area {set area:highway=service; delete highway;}
 highway=ford {set slow_track=yes; delete highway;}
 
 # исправляем 

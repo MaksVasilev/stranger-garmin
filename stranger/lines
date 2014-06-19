@@ -88,7 +88,7 @@ junction=roundabout [0x06 road_class=0 road_speed=1 resolution 21]
 
 # Treat ways under construction as highway=path
 highway=construction {add access = no; add bicycle = no; add foot = yes; add mkgmap:dead-end-check=false } [0x16 road_class=0 road_speed=1 resolution 23]
-highway=proposed {delete highway;}
+highway=proposed | highway=crossing {delete highway;}
   
 # Treat disused ways as highway=service, but at lower road_speed.
 highway=* & disused=yes [0x07 road_class=0 road_speed=1 resolution 22]
@@ -238,8 +238,8 @@ highway=steps {add access = no; add foot = yes; add bicycle = no} [0x16 road_cla
 
 
 # Mop up any unrecognised highway types
-highway=* & !(highway=bus_stop | highway=rest_area | highway=emergency_access_point) & length()>300 [0x07 resolution 21]
-highway=* & !(highway=bus_stop | highway=rest_area | highway=emergency_access_point) & length()<=300 [0x07 resolution 23]
+highway=* & !(highway=bus_stop | highway=emergency_access_point) & length()>300 [0x07 resolution 21]
+highway=* & !(highway=bus_stop | highway=emergency_access_point) & length()<=300 [0x07 resolution 23]
 
 railway=abandoned [0x0f road_class=0 road_speed=0 resolution 24 default_name 'разобранная ж/д' continue]
 railway=abandoned [0x1151e resolution 20 default_name 'разобранная ж/д']
