@@ -6,7 +6,7 @@
 
 bridge=no | bridge=false | bridge='0' | bridge=abandoned  {delete highway; delete railway; delete bridge;}
 building=no | building='0' {delete building;}
-highway=no | highway=abandoned {delete highway;}
+highway=no | highway=abandoned | highway=piste {delete highway;}
 railway=no {delete railway;}
 
 highway=ford {set slow_track=yes; delete highway;}
