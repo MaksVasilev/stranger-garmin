@@ -5,7 +5,7 @@ export PATH=./jre/bin/:./jre/:$PATH
 BASEDIR=/home/maks/OSM
 MKGMAPDIR=$BASEDIR/mkgmap-stable
 WWWROOT=/usr/www/garmin
-JAVAMEM="-Djava.io.tmpdir=$BASEDIR/tmp -Xms4G -Xmx6G"
+JAVAMEM="-Djava.io.tmpdir=$BASEDIR/tmp -Xms4G -Xmx5G"
 
 [ -z $1 ] && printf "\nuse: $0 <mapname>\n\n\tset FEDERAL=yes to make federal distinct map\n\tset SOURCE=/path/to/planet.pbf to overwrite source\n\t\t(default is $BASEDIR/source.osm.pbf)\n\n" && exit 0
 
