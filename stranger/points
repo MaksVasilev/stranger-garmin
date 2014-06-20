@@ -185,7 +185,7 @@ leisure=recreation_ground [0x2c08 resolution 21]
 leisure=sports_center | leisure=sports_centre { name '${name} (${sport})' | '${name}' } [0x2d0a resolution 20]
 leisure=stadium { name '${name} (${sport})' | '${name}' } [0x2c08 resolution 21]
 leisure=track { name '${name} (${sport})' | '${name}' } [0x2c08 resolution 21]
-leisure=water_park [0x2b04 resolution 21]
+leisure=water_park {set name='${name}, аквапарк' | 'аквапарк' } [0x2b04 resolution 22]
 
 man_made=tower & ( tower:type=light | tower:type=lighting ) [0x11518 resolution 23]
 man_made=tower & tower:type=communication [0x11519 resolution 23]
