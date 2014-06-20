@@ -6,11 +6,11 @@
 
 bridge=no | bridge=false | bridge='0' | bridge=abandoned  {delete highway; delete railway; delete bridge;}
 building=no | building='0' {delete building;}
-highway=no | highway=abandoned | highway=piste {delete highway;}
+highway=no  | highway=abandoned | highway=piste {delete highway;}
 railway=no {delete railway;}
 
 highway=services |  highway=rest_area {set area:highway=service; delete highway;}
-highway=construction {set highway=path;}
+highway=construction | highway=yes {set highway=path;}
 highway=ford {set slow_track=yes; delete highway;}
 
 # исправляем 
