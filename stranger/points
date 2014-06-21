@@ -53,7 +53,7 @@ amenity=emergency_phone [0x2f12 resolution 22 default_name 'аварийный �
 amenity=ferry_terminal [0x2f08 resolution 19]
 amenity=fast_food & cuisine=grill {set name='${name}, гриль' | 'гриль' } [0x2a03 resolution 22]
 amenity=fast_food & cuisine ~ '.*pizza.*' {set name='${name}, пицца' | 'пицца' } [0x2a0a resolution 22]
-amenity=fast_food [0x2a07 resolution 22 default_name 'фастфуд']
+amenity=fast_food {set name='${name}, фастфуд' | 'фастфуд' } [0x2a07 resolution 22]
 amenity=fire_station [0x3008 resolution 22 default_name 'пожарная станция']
 amenity=food_court [0x2a13 resolution 22]
 amenity=fuel & fuel:HGV_diesel=yes [ 0x2f16 resolution 19 ]
