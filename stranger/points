@@ -203,7 +203,7 @@ highway=milestone | railway=milestone | waterway=milestone
 
 traffic_calming=bump | traffic_calming=hump [0x11507 resolution 24]
 highway=traffic_signals [0x11512 resolution 24]
-#highway=crossing [0x11506 resolution 24]
+highway=crossing [0x11506 resolution 24]
 
 (natural=beach & mkgmap:area2poi!=true) [0x6604 resolution 21]
 natural=cave_entrance [0x6601 resolution 20]
