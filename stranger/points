@@ -300,7 +300,7 @@ sport=skating [0x2d08 resolution 21]
 sport=skiing [0x2d06 resolution 21]
 sport=swimming [0x2d09 resolution 21]
 
-tourism=alpine_hut {set name='${name} (${alt_name}) - ${description}, приют' | '${name} - ${description}, приют' | '${name} (${alt_name}), приют' | '${name}, приют' | 'приют' } [0x1160a resolution 21]
+tourism=alpine_hut {set name='${name} (${alt_name}) - ${description}, приют' | '${name} - ${description}, приют' | '${name} (${alt_name}), приют' | '${name}, приют' | 'приют' } [0x1160a resolution 22]
 tourism=attraction & historic=* [0x2c02 resolution 20]
 tourism=attraction [0x2c04 resolution 20]
 tourism=artwork [0x2c04 resolution 20]
