@@ -88,7 +88,7 @@ junction=roundabout [0x06 road_class=0 road_speed=1 resolution 21]
 
 # Treat ways under construction as highway=path
 #highway=construction {add access = no; add bicycle = no; add foot = yes; add mkgmap:dead-end-check=false } [0x16 road_class=0 road_speed=1 resolution 23]
-highway=proposed | highway=crossing {delete highway;}
+highway=proposed | highway=crossing | highway=planned {delete highway;}
   
 # Treat disused ways as highway=service, but at lower road_speed.
 highway=* & disused=yes [0x07 road_class=0 road_speed=1 resolution 22]
@@ -215,6 +215,8 @@ minor_service=yes & tunnel=yes [0x11607 resolution 24]
 minor_service=yes & oneway=yes [0x137 resolution 24]
 minor_service=yes & mkgmap:unpaved=1 [0x147 resolution 24]
 minor_service=yes [0x07 road_class=0 road_speed=1 resolution 24]
+
+highway=escape [0x1161f road_class=0 road_speed=1 resolution 23]
 
 (highway=service | highway=raceway) & (bridge=yes|tunnel=yes|oneway=yes|mkgmap:unpaved=1) [0x0f road_class=0 road_speed=2 resolution 24 continue]
 (highway=service | highway=raceway) & bridge=yes [0x1161e resolution 23]
