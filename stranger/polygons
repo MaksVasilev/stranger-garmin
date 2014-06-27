@@ -132,9 +132,15 @@ natural=water & area_size() <= 3000 [0x3c resolution 22]
 natural=waterfall | waterway=waterfall [0x47 resolution 21]
 natural=sea | natural=bay [0x32 resolution 10 continue]
 
-wood=coniferous [0x11604 resolution 20 continue]
-wood=deciduous [0x11605 resolution 20 continue]
-wood=mixed [0x11606 resolution 20 continue]
+wood=coniferous [0x11604 resolution 20]
+wood=deciduous [0x11605 resolution 20]
+wood=mixed [0x11606 resolution 20]
+wood:density=sparse | wood:density=very_sparse [0x1160a resolution 20]
+wood:damage=dead_wood | wood:lost=dead_wood [0x1160b resolution 20]
+wood:damage=burnt | wood:lost=burnt [0x1160b resolution 20]
+wood:damage=windfall | wood:lost=windfall [0x1160d resolution 20]
+wood=logging | landuse=logging [0x1160c resolution 20]
+
 
 (landuse=forest | natural=wood | landuse=wood) & area_size() > 5000 [0x50 resolution 18]
 (landuse=forest | natural=wood | landuse=wood) & area_size() > 3000 & area_size() <= 5000 [0x50 resolution 20]
