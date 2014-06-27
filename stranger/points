@@ -199,7 +199,7 @@ man_made=lighthouse | seamark=lighthouse {name '${name} (${ref}, ${ele})' | '${n
 man_made=beacon {name '${name} (${ref}, ${ele})' | '${name} (${ele})' | '${name} (${ref})' | '${name}' | '${ele}' | '${ref}' } [0x10206 resolution 22]
 
 highway=milestone | railway=milestone | waterway=milestone
-    {name '${pk} (${pk:backward})' | '${pk}' | '(${pk:backward})'} [0x1151a resolution 24]
+    {name '${pk} - ${ref} (${pk:backward})' | '${pk} (${pk:backward})' | '${pk} - ${ref}' | '${pk}' | '${ref}' |  '(${pk:backward})'} [0x1151a resolution 23]
 
 traffic_calming=bump | traffic_calming=hump [0x11507 resolution 24]
 highway=traffic_signals [0x11512 resolution 24]
