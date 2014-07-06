@@ -267,7 +267,7 @@ power=minor_line [0x29 resolution 21]
 
 route=ferry {add mkgmap:ferry=1} [0x1b road_class=3 road_speed=0 resolution 18]
 
-(waterway=rapids | rapids=yes | waterway=rapid | whitewater=rapid | whitewater=rapids) & area!=yes {name '${name|def:} ${width|def:}' } [0x1151b resolution 19 continue]
+(waterway=rapids | rapids=yes | waterway=rapid | whitewater=rapid | whitewater=rapids | natural=rapids ) & area!=yes {set name='пор. ${whitewater:section_name} ${whitewater:section_grade}' | 'пор. ${whitewater:rapid_name} ${whitewater:section_grade}' | 'пор. ${whitewater:rapid_name} ${whitewater:rapid_grade}' | 'пор. ${whitewater:section_name} ${whitewater:rapid_grade}' | 'пор. ${whitewater:rapid_name} ${whitewater:grade}' | 'пор. ${whitewater:section_name}' | 'пор. ${whitewater:rapid_name}' | 'пор. ${whitewater:section_grade}' | 'пор. ${whitewater:rapid_grade}' | 'порог' } [0x1151b resolution 21 continue]
 waterway=canal [0x1f resolution 19 continue]
 waterway=drain [0x18 resolution 20 continue]
 waterway=ditch [0x18 resolution 20 continue]

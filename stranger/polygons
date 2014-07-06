@@ -159,7 +159,7 @@ place=islet & name=* [0x53 resolution 20]
 building=yes & shop=* [0x08 resolution 21]
 shop=* [0x2a resolution 21]
 
-(waterway=rapids | rapids=yes) & area=yes {name '${name|def:} ${width|def:}' } [0x1151e resolution 19 continue]
+(waterway=rapids | rapids=yes | waterway=rapid | whitewater=rapid | whitewater=rapids | natural=rapids) & area=yes {name '${name|def:} ${width|def:}' } [0x1151e resolution 19 continue]
 waterway=riverbank [0x46 resolution 16]
 
 historic=museum | historic=memorial [0x1e resolution 20]
