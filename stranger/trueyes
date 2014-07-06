@@ -4,7 +4,8 @@
 
 # удаляем
 
-bridge=no | bridge=false | bridge='0' | bridge=abandoned  {delete highway; delete railway; delete bridge;}
+bridge=no | bridge=false | bridge='0' {delete bridge;}
+bridge=abandoned  {delete highway; delete railway;}
 building=no | building='0' {delete building;}
 highway=no  | highway=abandoned | highway=piste {delete highway;}
 railway=no {delete railway;}
