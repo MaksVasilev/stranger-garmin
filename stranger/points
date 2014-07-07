@@ -213,6 +213,7 @@ natural=glacier [0x650a resolution 21]
 # используем вместо стандартных типов свой
 # natural=peak {name '${name|def:}${ele|height:m=>ft|def:}' } [0x6616 resolution 19]
 # natural=volcano {name '${name|def:} ${ele|def:}' } [0x2c0c resolution 21]
+natural=peak & peak=hill | natural=hill {name '${name|def:} ${ele|def:}' } [0x1160f resolution 22]
 natural=peak & name=* {name '${name|def:} ${ele|def:}' } [0x1151d resolution 20]
 natural=peak {name '${name|def:} ${ele|def:}' } [0x1151d resolution 22]
 natural=volcano {name '${name|def:} ${ele|def:}' } [0x1151e resolution 19]
